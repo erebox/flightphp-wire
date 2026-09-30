@@ -4,10 +4,6 @@ namespace core\helpers;
 
 class Utils {
 
-    public static function getDevMode(string $h): bool {
-        return str_contains(strtolower($h), "localhost");
-    }
-
     /*
         Gestione caricamento file e json
     */

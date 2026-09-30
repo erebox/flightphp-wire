@@ -6,6 +6,7 @@ use Flight;
 use flight\Engine;
 
 use core\helpers\Utils;
+use core\helpers\Session;
 
 use core\helpers\AttributeRouteRegistrar;
 use core\helpers\ControllerScanner;
@@ -30,6 +31,7 @@ class Bootstrap {
         $app = Flight::app();
 
         $app->register('utils', Utils::class);
+        $app->register('session', Session::class);
 
         $dirCorePath = __DIR__.DIRECTORY_SEPARATOR;
         $app->path($dirCorePath);
