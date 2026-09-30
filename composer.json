@@ -1,0 +1,34 @@
+{
+    "name": "erebox/flightphp-wire",
+    "description": "Convenzioni di progetto su FlightPHP: bootstrap, controller base, routing via attributi, generatore OpenAPI.",
+    "type": "library",
+    "keywords": [
+        "flight",
+        "flightphp",
+        "restapi",
+        "openapi",
+        "routing"
+    ],
+    "homepage": "https://github.com/erebox/flightphp-wire",
+    "support": {
+        "issues": "https://github.com/erebox/flightphp-wire/issues",
+        "source": "https://github.com/erebox/flightphp-wire"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Erebox",
+            "email": "erebox@yahoo.it",
+            "role": "lead"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "flightphp/core": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "core\\": "src/"
+        }
+    }
+}
