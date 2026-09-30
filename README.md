@@ -1,6 +1,6 @@
 # flightphp-wire
 
-![flightphp-wire](flightphp-wire.svg)
+<img src="flightphp-wire.svg" alt="flightphp-wire" width="200">
 
 Convenzioni di progetto condivise fra i siti basati su [FlightPHP](https://flightphp.com/):
 
@@ -9,6 +9,7 @@ Convenzioni di progetto condivise fra i siti basati su [FlightPHP](https://fligh
 - `core\attributes\Route` è l'attributo PHP con cui annotare i metodi dei controller per dichiarare path, verbo HTTP, middleware e metadati OpenAPI.
 - `core\helpers\ControllerScanner`, `AttributeRouteRegistrar` e `OpenApiGenerator` gestiscono rispettivamente il censimento dei controller, la registrazione delle route e la generazione dello spec OpenAPI.
 - `core\middlewares\WebHeader` e `ValidateApikey` sono i middleware di default applicati rispettivamente alle route web e API.
+- `BaseWebController::renderPageLinks($title, $controllerClass = null)` renderizza una pagina con i link alle pagine del controller (di default quello corrente); `pageLinks($controllerClass)` restituisce lo stesso elenco come array. Sono incluse solo le route `GET` senza parametri di path e non marcate `hidden`; l'etichetta è il `summary` della route (o il path). La vista `links.html` è quella del sito se presente in `app/views`, altrimenti quella di default della libreria.
 - `core\controllers\DefaultRouteController` fornisce le route di default: `/` (homepage), `/api` (Swagger UI) e `/api/openapi` (spec generata). `Bootstrap::init` le registra sempre, ma salta quelle il cui path+metodo è già dichiarato da un controller del sito: un sito può quindi sovrascrivere una singola route (es. solo `/`) senza perdere le altre. Le viste `index.html`/`swagger.html` sono quelle del sito se presenti in `app/views`, altrimenti vengono usate quelle di default incluse nella libreria (`src/views`).
 
 ## Installazione
@@ -19,7 +20,7 @@ composer require erebox/flightphp-wire
 
 ## Uso
 
-Nel file di ingresso del sito (es. `index.php`):
+Nel file iniziale del sito (es. `index.php`):
 
 ```php
 require 'vendor/autoload.php';

@@ -25,8 +25,8 @@ class OpenApiGenerator {
             'openapi' => '3.0.0',
             'info' => [
                 'title' => $apiInfo['title'] ?? 'API',
-                'description' => $apiInfo['description'] ?? '',
-                'contact' => ['email' => $apiInfo['contactEmail'] ?? ''],
+                'description' => $apiInfo['description'] ?? 'REST Api',
+                'contact' => ['email' => $apiInfo['contactEmail'] ?? 'hal9000.hcl@example.net'],
                 'version' => $apiInfo['version'] ?? '1.0.0',
             ],
             'servers' => [

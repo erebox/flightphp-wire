@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= htmlspecialchars($title) ?></title>
+    <style>
+        :root {--bg-color: #0f0f12;--card-bg: #1e1e26;--accent: #00d4ff;--text: #e0e0e0;--muted: #9a9aa8;}
+        body {font-family:'Segoe UI',Roboto,sans-serif;background-color:var(--bg-color);color:var(--text);margin:0;padding:20px;display:flex;flex-direction:column;align-items:center;}
+        h1 {margin-bottom:30px;color:var(--accent);text-transform:uppercase;letter-spacing:2px;}
+        .grid {display:grid;grid-template-columns:repeat(auto-fill, minmax(180px, 1fr));gap:20px;width:100%;max-width:1000px;}
+        .card {background:var(--card-bg);padding:20px;border-radius:12px;text-align:center;transition:all 0.3s ease;border:1px solid transparent;box-shadow:0 4px 15px rgba(0,0,0,0.3);color:inherit;text-decoration:none;}
+        .card:hover {transform:translateY(-5px);border-color:var(--accent);box-shadow:0 0 15px rgba(0,212,255,0.4);}
+        .name {font-weight:bold;display:block;}
+        .path {color:var(--muted);font-size:0.85em;display:block;margin-top:6px;}
+        .desc {color:var(--muted);font-size:0.85em;display:block;margin-top:8px;}
+    </style>
+</head>
+<body>
+    <h1><?= htmlspecialchars($title) ?></h1>
+    <div class="grid">
+<?php foreach ($links as $l): ?>
+        <a class="card" href="<?= htmlspecialchars($l['path']) ?>">
+            <span class="name"><?= htmlspecialchars($l['label']) ?></span>
+            <span class="path"><?= htmlspecialchars($l['path']) ?></span>
+<?php if ($l['description'] !== ''): ?>
+            <span class="desc"><?= htmlspecialchars($l['description']) ?></span>
+<?php endif; ?>
+        </a>
+<?php endforeach; ?>
+    </div>
+</body>
+</html>
