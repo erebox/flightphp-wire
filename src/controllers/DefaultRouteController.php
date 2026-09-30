@@ -30,14 +30,11 @@ class DefaultRouteController extends BaseWebController {
 
     #[Route('/api/openapi', 'GET', summary: 'OpenAPI spec generato', hidden: true)]
     public function openapi(): void {
-        $config = $this->get('config');
-        $host = $this->request()->host;
-        $baseUrl = $this->utils()::getDevMode($host) ? "http://{$host}/api" : rtrim((string) ($config['BASEURL'] ?? ''), '/') . '/api';
         $apiControllers = ControllerScanner::scan($this->get('controllersPath'), $this->get('controllersNamespace'))['api'];
         $spec = OpenApiGenerator::generateFullSpec(
             $apiControllers,
-            $config['API_INFO'] ?? [],
-            $baseUrl
+            $this->get('config')['API_INFO'] ?? [],
+            $this->request()->scheme.'://'.$this->request()->host.'/api'
         );
 
         $this->json($spec);
