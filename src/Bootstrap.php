@@ -10,6 +10,8 @@ use core\helpers\Utils;
 use core\helpers\AttributeRouteRegistrar;
 use core\helpers\ControllerScanner;
 
+use core\controllers\DefaultRouteController;
+
 use core\middlewares\WebHeader;
 use core\middlewares\ValidateApikey;
 
@@ -46,6 +48,7 @@ class Bootstrap {
         $dirDataPath = $dirRootPath.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR;
         $app->set('dataPath', $dirDataPath);
         $app->set('controllersPath', $dirBasePath.'controllers'.DIRECTORY_SEPARATOR);
+        $app->set('controllersNamespace', $controllersNamespace);
 
         $app->set('dir', $dirRootPath);
         $app->set('flight.views.path', $dirBasePath.'views');
@@ -54,8 +57,17 @@ class Bootstrap {
         $app->set('config', Utils::readJson($dirDataPath, $configFile));
 
         $controllers = ControllerScanner::scan($app->get('controllersPath'), $controllersNamespace);
+
         AttributeRouteRegistrar::registerMany($app, $controllers['web'], [WebHeader::class]);
         AttributeRouteRegistrar::registerMany($app, $controllers['api'], [ValidateApikey::class], '/api');
+
+        // Route di default della libreria (homepage, Swagger UI, /api/openapi): vengono registrate solo per i path che il sito non ha già definito autonomamente,
+        // indipendentemente dal fatto che il sito abbia una propria classe DefaultRouteController.
+        $siteRoutes = array_merge(
+            AttributeRouteRegistrar::collectRoutes($controllers['web']),
+            AttributeRouteRegistrar::collectRoutes($controllers['api'], '/api')
+        );
+        AttributeRouteRegistrar::register($app, DefaultRouteController::class, [WebHeader::class], '', $siteRoutes);
 
         return $app;
     }

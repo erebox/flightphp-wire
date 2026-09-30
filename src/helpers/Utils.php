@@ -22,10 +22,13 @@ class Utils {
     public static function readFile(string $directory, string $fileName, bool $isGz = false): string {
         $fileContent = "";
         $path = realpath($directory.$fileName);
-        if (str_starts_with($path,  $directory)) {
-            $fileContent = file_get_contents($path);
+        if ($path !== false && str_starts_with($path, $directory)) {
+            $fileContent = file_get_contents($path) ?: "";
         }
-        return ($isGz === true) ? gzdecode($fileContent) : $fileContent;
+        if ($isGz === true && $fileContent !== "") {
+            $fileContent = gzdecode($fileContent) ?: "";
+        }
+        return $fileContent;
     }
 
     public static function readJson(string $directory, string $fileName, bool $isGz = false): array {
