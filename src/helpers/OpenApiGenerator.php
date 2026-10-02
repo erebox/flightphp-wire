@@ -34,8 +34,9 @@ class OpenApiGenerator {
             ],
             'paths' => $paths,
             'components' => [
-                'schemas' => $schemas,
-                'securitySchemes' => $apiInfo['securitySchemes'] ?? [],
+                // (object): vuoti devono restare oggetti JSON ({}), non array ([])
+                'schemas' => (object) $schemas,
+                'securitySchemes' => (object) ($apiInfo['securitySchemes'] ?? []),
             ],
         ];
     }

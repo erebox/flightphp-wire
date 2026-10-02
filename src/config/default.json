@@ -1,0 +1,70 @@
+{
+    "BASEURL": "",
+    "APIKEYS": {},
+    "API_INFO": {
+        "title": "API",
+        "description": "REST Api",
+        "contactEmail": "",
+        "version": "1.0.0"
+    },
+    "OAUTHS": {
+        "CFG": {
+            "Google": {
+                "clientID": "",
+                "clientSecret": "",
+                "urlAuth": "https://accounts.google.com/o/oauth2/v2/auth?client_id={clientID}&redirect_uri={redirectUri}&response_type=code&scope=email",
+                "urlAccessToken": "https://www.googleapis.com/oauth2/v4/token",
+                "urlUserInfo": "https://www.googleapis.com/oauth2/v2/userinfo"
+            },
+            "Github": {
+                "clientID": "",
+                "clientSecret": "",
+                "urlAuth": "https://github.com/login/oauth/authorize?client_id={clientID}&redirect_uri={redirectUri}",
+                "urlAccessToken": "https://github.com/login/oauth/access_token",
+                "urlUserInfo": "https://api.github.com/user"
+            },
+            "Gitlab": {
+                "clientID": "",
+                "clientSecret": "",
+                "urlAuth": "https://gitlab.com/oauth/authorize?client_id={clientID}&redirect_uri={redirectUri}&response_type=code&scope=read_user%20api%20read_api",
+                "urlAccessToken": "https://gitlab.com/oauth/token",
+                "urlUserInfo": "https://gitlab.com/api/v4/user"
+            },
+            "Yahoo": {
+                "clientID": "",
+                "clientSecret": "",
+                "urlAuth": "https://api.login.yahoo.com/oauth2/request_auth?client_id={clientID}&redirect_uri={redirectUri}&response_type=code",
+                "urlAccessToken": "https://api.login.yahoo.com/oauth2/get_token",
+                "urlUserInfo": "https://api.login.yahoo.com/openid/v1/userinfo"
+            },
+            "Microsoft": {
+                "clientID": "",
+                "clientSecret": "",
+                "urlAuth": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id={clientID}&redirect_uri={redirectUri}&response_type=code&response_mode=query&scope=openid",
+                "urlAccessToken": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+                "urlUserInfo": "https://graph.microsoft.com/oidc/userinfo"
+            },
+            "Facebook": {
+                "clientID": "",
+                "clientSecret": "",
+                "urlAuth": "https://www.facebook.com/v12.0/dialog/oauth?client_id={clientID}&redirect_uri={redirectUri}",
+                "urlAccessToken": "https://graph.facebook.com/v12.0/oauth/access_token",
+                "urlUserInfo": "https://graph.facebook.com/me?fields=id,name,email,picture"
+            },
+            "Dropbox": {
+                "clientID": "",
+                "clientSecret": "",
+                "urlAuth": "https://www.dropbox.com/oauth2/authorize?client_id={clientID}&redirect_uri={redirectUri}&response_type=code",
+                "urlAccessToken": "https://www.dropbox.com/oauth2/token",
+                "urlUserInfo": "https://api.dropboxapi.com/2/users/get_current_account"
+            },
+            "Erebox": {
+                "clientID": "",
+                "clientSecret": "",
+                "urlAuth": "https://erebox.altervista.org/oauth/authorize/?client_id={clientID}&redirect_uri={redirectUri}",
+                "urlAccessToken": "https://erebox.altervista.org/oauth/token/",
+                "urlUserInfo": "https://erebox.altervista.org/oauth/user/"
+            }
+        }
+    }
+}

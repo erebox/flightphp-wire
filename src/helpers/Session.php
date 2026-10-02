@@ -19,7 +19,7 @@ class Session {
 
     protected const DEFAULT_OPTIONS = [
         'name'              => 'SESS_ID',
-        'cache_limiter'     => 'private_no_expire',
+        'cache_limiter'     => 'nocache', // pagine legate alla sessione (login, redirect OAuth): mai in cache del browser
         'use_strict_mode'   => true,
         'use_only_cookies'  => true,
         'cookie_httponly'   => true,

@@ -21,7 +21,7 @@ class Bootstrap {
     /**
      * Inizializza l'engine Flight con la convenzione di progetto comune a tutti i siti:
      * controller in app/controllers auto-censiti tramite BaseWebController/BaseApiController,
-     * route dichiarate con l'attributo Route, config letta da data/config.json.
+     * route dichiarate con l'attributo Route, config letta da data/config.json (sopra i default di src/config/default.json).
      *
      * @param string $appDir Cartella 'app' del sito (contiene controllers/, views/, ...)
      * @param string $controllersNamespace Namespace PSR-4 dei controller del sito (es. 'app\\controllers')
@@ -56,7 +56,11 @@ class Bootstrap {
         $app->set('flight.views.path', $dirBasePath.'views');
         $app->set('flight.views.extension', '.html');
 
-        $app->set('config', Utils::readJson($dirDataPath, $configFile));
+        // Config del sito sovrapposta (merge ricorsivo) a quella di default della libreria (src/config/default.json)
+        $app->set('config', array_replace_recursive(
+            Utils::readJson($dirCorePath.'config'.DIRECTORY_SEPARATOR, 'default.json'),
+            Utils::readJson($dirDataPath, $configFile)
+        ));
 
         $controllers = ControllerScanner::scan($app->get('controllersPath'), $controllersNamespace);
 
