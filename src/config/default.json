@@ -30,13 +30,6 @@
                 "urlAccessToken": "https://gitlab.com/oauth/token",
                 "urlUserInfo": "https://gitlab.com/api/v4/user"
             },
-            "Yahoo": {
-                "clientID": "",
-                "clientSecret": "",
-                "urlAuth": "https://api.login.yahoo.com/oauth2/request_auth?client_id={clientID}&redirect_uri={redirectUri}&response_type=code",
-                "urlAccessToken": "https://api.login.yahoo.com/oauth2/get_token",
-                "urlUserInfo": "https://api.login.yahoo.com/openid/v1/userinfo"
-            },
             "Microsoft": {
                 "clientID": "",
                 "clientSecret": "",
@@ -51,6 +44,13 @@
                 "urlAccessToken": "https://graph.facebook.com/v12.0/oauth/access_token",
                 "urlUserInfo": "https://graph.facebook.com/me?fields=id,name,email,picture"
             },
+            "Yahoo": {
+                "clientID": "",
+                "clientSecret": "",
+                "urlAuth": "https://api.login.yahoo.com/oauth2/request_auth?client_id={clientID}&redirect_uri={redirectUri}&response_type=code",
+                "urlAccessToken": "https://api.login.yahoo.com/oauth2/get_token",
+                "urlUserInfo": "https://api.login.yahoo.com/openid/v1/userinfo"
+            },
             "Dropbox": {
                 "clientID": "",
                 "clientSecret": "",
@@ -58,12 +58,12 @@
                 "urlAccessToken": "https://www.dropbox.com/oauth2/token",
                 "urlUserInfo": "https://api.dropboxapi.com/2/users/get_current_account"
             },
-            "Erebox": {
+            "Nantonazzo": {
                 "clientID": "",
                 "clientSecret": "",
-                "urlAuth": "https://erebox.altervista.org/oauth/authorize/?client_id={clientID}&redirect_uri={redirectUri}",
-                "urlAccessToken": "https://erebox.altervista.org/oauth/token/",
-                "urlUserInfo": "https://erebox.altervista.org/oauth/user/"
+                "urlAuth": "https://nantonazzo.altervista.org/oauth2/authorize/?client_id={clientID}&redirect_uri={redirectUri}&response_type=code&scope=profile%20email",
+                "urlAccessToken": "https://nantonazzo.altervista.org/oauth2/token",
+                "urlUserInfo": "https://nantonazzo.altervista.org/oauth2/userinfo"
             }
         }
     }

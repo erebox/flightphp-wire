@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= (int) $code ?> - <?= htmlspecialchars($title) ?></title>
+    <style>
+        :root {
+            --bg-color: #eee;
+            --card-bg: #fff;
+            --accent: #07b;
+            --text: #222;
+            --muted: #778;
+            --border: #dde;
+        }
+        body {font-family:'Segoe UI',Roboto,sans-serif;background-color:var(--bg-color);color:var(--text);margin:0;padding:20px;min-height:100vh;box-sizing:border-box;display:flex;align-items:center;justify-content:center;}
+        .card {background:var(--card-bg);padding:40px 30px;border-radius:12px;text-align:center;border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,0.06);max-width:480px;width:100%;}
+        .code {font-size:5em;font-weight:bold;color:var(--accent);line-height:1;letter-spacing:4px;}
+        h1 {font-size:1.3em;text-transform:uppercase;letter-spacing:2px;margin:16px 0 10px;}
+        p {color:var(--muted);margin:0 0 8px;}
+        .path {font-family:monospace;font-size:0.85em;word-break:break-all;}
+        .detail {font-family:monospace;font-size:0.8em;text-align:left;background:var(--bg-color);padding:10px;border-radius:6px;margin-top:16px;white-space:pre-wrap;word-break:break-all;}
+        a.home {display:inline-block;margin-top:24px;padding:10px 22px;border-radius:8px;background:var(--accent);color:#fff;text-decoration:none;transition:opacity 0.2s;}
+        a.home:hover {opacity:0.85;}
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="code"><?= (int) $code ?></div>
+        <h1><?= htmlspecialchars($title) ?></h1>
+        <p><?= htmlspecialchars($message) ?></p>
+        <p class="path"><?= htmlspecialchars($path) ?></p>
+<?php if ($detail !== ''): ?>
+        <div class="detail"><?= htmlspecialchars($detail) ?></div>
+<?php endif; ?>
+        <a class="home" href="/">Torna alla home</a>
+    </div>
+</body>
+</html>

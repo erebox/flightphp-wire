@@ -12,6 +12,7 @@ abstract class BaseController {
     protected string $webPath;
     protected string $dataPath;
     protected string $assetsPath;
+    protected string $filesPath;
 
     public function __construct(Engine $app) {
         $this->app = $app;
@@ -19,7 +20,9 @@ abstract class BaseController {
         $this->dirPath = $this->get('dirPath');
         $this->webPath = $this->get('webPath');
         $this->dataPath = $this->get('dataPath');
+        
         $this->assetsPath = $this->dirPath.DIRECTORY_SEPARATOR."assets".DIRECTORY_SEPARATOR;
+        $this->filesPath = $this->dirPath.DIRECTORY_SEPARATOR."files".DIRECTORY_SEPARATOR;
     }
 
     public function __call(string $name, array $arguments) {

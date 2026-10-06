@@ -7,6 +7,7 @@ use flight\Engine;
 
 use core\helpers\Utils;
 use core\helpers\Session;
+use core\helpers\ErrorPages;
 
 use core\helpers\AttributeRouteRegistrar;
 use core\helpers\ControllerScanner;
@@ -74,6 +75,9 @@ class Bootstrap {
             AttributeRouteRegistrar::collectRoutes($controllers['api'], '/api')
         );
         AttributeRouteRegistrar::register($app, DefaultRouteController::class, [WebHeader::class], '', $siteRoutes);
+
+        // Pagine di errore 404/405/500 (JSON sotto /api, vista 'error.html' altrove)
+        ErrorPages::register($app, '/api');
 
         return $app;
     }
