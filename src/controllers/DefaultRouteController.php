@@ -34,7 +34,7 @@ class DefaultRouteController extends BaseWebController {
         $spec = OpenApiGenerator::generateFullSpec(
             $apiControllers,
             $this->get('config')['API_INFO'] ?? [],
-            $this->request()->scheme.'://'.$this->request()->host.'/api'
+            $this->request()->scheme.'://'.$this->request()->host.$this->webUrl('/api')
         );
 
         $this->json($spec);
@@ -42,11 +42,8 @@ class DefaultRouteController extends BaseWebController {
 
     private function renderTemplate(string $name): void {
         $appViewFile = rtrim((string) $this->get('flight.views.path'), DIRECTORY_SEPARATOR). DIRECTORY_SEPARATOR . $name . '.html';
-        if (file_exists($appViewFile)) {
-            $this->render($name);
-            return;
-        }
-        readfile(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . $name . '.html');
+        // Anche le viste della libreria passano dal motore di viste: possono usare $basePath per i link
+        $this->render(file_exists($appViewFile) ? $name : dirname(__DIR__) . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . $name . '.html');
     }
 
 }

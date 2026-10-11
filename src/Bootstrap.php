@@ -47,7 +47,6 @@ class Bootstrap {
 
         $dirRootPath = dirname($dirBasePath);
         $app->set('dirPath', $dirRootPath);
-        $app->set('webPath', '/');
         $dirDataPath = $dirRootPath.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR;
         $app->set('dataPath', $dirDataPath);
         $app->set('controllersPath', $dirBasePath.'controllers'.DIRECTORY_SEPARATOR);
@@ -62,6 +61,15 @@ class Bootstrap {
             Utils::readJson($dirCorePath.'config'.DIRECTORY_SEPARATOR, 'default.json'),
             Utils::readJson($dirDataPath, $configFile)
         ));
+
+        // Percorso base del sito: la sottocartella in cui si trova index.php ('' se il sito è alla radice del dominio).
+        // basePath ('' o '/sottocartella') e webPath (basePath + '/') sono gli indirizzi pubblici da usare per link e redirect:
+        // i redirect ricevono quindi già il percorso completo e Flight non deve aggiungere di suo la sottocartella.
+        $basePath = self::basePath($app);
+        $app->set('basePath', $basePath);
+        $app->set('webPath', $basePath.'/');
+        $app->set('flight.base_url', '/');
+        $app->view()->set('basePath', htmlspecialchars($basePath, ENT_QUOTES, 'UTF-8'));
 
         $controllers = ControllerScanner::scan($app->get('controllersPath'), $controllersNamespace);
 
@@ -80,6 +88,19 @@ class Bootstrap {
         ErrorPages::register($app, '/api');
 
         return $app;
+    }
+
+    /**
+     * Percorso base senza '/' finale: dalla chiave BASEPATH della config se impostata (es. sito dietro un proxy),
+     * altrimenti dalla cartella dello script (index.php) ricavata da Flight.
+     */
+    private static function basePath(Engine $app): string {
+        $configurato = $app->get('config')['BASEPATH'] ?? null;
+        $base = is_string($configurato) && trim($configurato, '/ ') !== ''
+            ? $configurato
+            : (string) $app->request()->base;
+        $base = trim(str_replace('\\', '/', $base), '/ ');
+        return $base === '' || $base === '.' ? '' : '/'.$base;
     }
 
 }

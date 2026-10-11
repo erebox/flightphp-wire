@@ -19,7 +19,7 @@
     <script>
       window.onload = () => { 
         globalThis.ui = SwaggerUIBundle({ 
-          url:  '/api/openapi', dom_id: '#swagger-ui', layout: "StandaloneLayout", 
+          url:  '<?= $basePath ?>/api/openapi', dom_id: '#swagger-ui', layout: "StandaloneLayout", 
           presets: [ SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset ], plugins: [ SwaggerUIBundle.plugins.DownloadUrl ], deepLinking: true 
         }); 
       }; 
